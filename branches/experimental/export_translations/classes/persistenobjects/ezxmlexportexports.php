@@ -83,7 +83,12 @@ class eZXMLExportExports extends eZPersistentObject
                                          'export_hidden_nodes'     => array( 'name'     => 'export_hidden_nodes',
                                                                              'datatype' => 'integer',
                                                                              'required' => false,
-                                                                             'default'  => 0 ) ),
+                                                                             'default'  => 0 ),
+        
+                                         'translations_to_export'  => array( 'name'     => 'translations_to_export',
+                                                                             'datatype' => 'string',
+                                                                             'required' => false,
+                                                                             'default'  => '' ) ),
 
                       'keys' => array( 'id' ),
                       'function_attributes' => array(),
