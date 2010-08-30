@@ -30,35 +30,35 @@ class eZXMLExportExporter
      *
      * @var string
      */
-    private $CurrentObjectKey;
+    protected $CurrentObjectKey;
 
     /**
      * The list of all exportable nodes
      *
      * @var array
      */
-    private $ExportableNodeList;
+    protected $ExportableNodeList;
 
     /**
      * The list of exported object ID
      *
      * @var array
      */
-    private $ExportedObjectIDList;
+    protected $ExportedObjectIDList;
 
     /**
      * The eZXMLExport instance
      *
      * @var object
      */
-    private $eZXMLExport;
+    protected $eZXMLExport;
 
     /**
      * The eZXMLExportLogger instance
      *
      * @var object
      */
-    private $eZXMLExportLogger;
+    protected $eZXMLExportLogger;
 
     /**
      * The eZXMLExportProcessLog instance
@@ -73,7 +73,7 @@ class eZXMLExportExporter
      *
      * @var string
      */
-    private $eZXMLExportSlicingMode;
+    protected $eZXMLExportSlicingMode;
 
     /**
      * Flag to set the export in verbose
@@ -81,42 +81,42 @@ class eZXMLExportExporter
      *
      * @var bool
      */
-    private $IsVerbose;
+    protected $IsVerbose;
 
     /**
      * The list of related objects for this export
      *
      * @var array
      */
-    private $RelatedObjectList;
+    protected $RelatedObjectList;
 
     /**
      * The name of the generated XML File
      *
      * @var string
      */
-    private $XMLFile;
+    protected $XMLFile;
 
     /**
      * The XML result for an export
      *
      * @var array
      */
-    private $XMLResultArray;
+    protected $XMLResultArray;
 
     /**
      * The timestamp when the export started
      *
      * @var int
      */
-    private $StartTime;
+    protected $StartTime;
 
     /**
      * The list of sources fo this export
      *
      * @var array
      */
-    private $SourceList;
+    protected $SourceList;
 
     /**
      * The list of classes defined as exportable
@@ -195,7 +195,7 @@ class eZXMLExportExporter
      * @see eZCharTransform::instance()
      * @return string The cleaned export name
      */
-    private function cleanExportName()
+    protected function cleanExportName()
     {
         $trans = eZCharTransform::instance();
         $exportName = $this->eZXMLExport->attribute( 'name' );
@@ -210,7 +210,7 @@ class eZXMLExportExporter
      *
      * @return string The slicing mode
      */
-    private function getSlicingMode()
+    protected function getSlicingMode()
     {
         if( $this->eZXMLExport->attribute( 'slicing_mode' ) != '' )
         {
@@ -233,7 +233,7 @@ class eZXMLExportExporter
      *
      * @return array The table with FTP informations
      */
-    private function fetchFTPInfo()
+    protected function fetchFTPInfo()
     {
         // a customer may provide one FTP login
         // or one per export the one defined
@@ -265,7 +265,7 @@ class eZXMLExportExporter
      *
      * @return void
      */
-    private function exportHeaders()
+    protected function exportHeaders()
     {
         $ini      = eZINI::instance('i18n.ini');
         $encoding = $ini->variable( 'CharacterSettings', 'Charset' );
@@ -577,7 +577,7 @@ class eZXMLExportExporter
      *
      * @return void
      */
-    private function resetObjectList()
+    protected function resetObjectList()
     {
         $this->XMLResultArray['objects'] = array();
 
@@ -589,7 +589,7 @@ class eZXMLExportExporter
      *
      * @return void
      */
-    private function resetCurrentObjectKey()
+    protected function resetCurrentObjectKey()
     {
         $this->CurrentObjectKey = 0;
     }
@@ -601,7 +601,7 @@ class eZXMLExportExporter
      * @param  array $fileList The list of files which to apply the XSLT on
      * @return void
      */
-    private function applyXSLTIfNeeded( $fileList )
+    protected function applyXSLTIfNeeded( $fileList )
     {
         // applying XSLT if needed
         $ini = eZINI::instance( 'ezxmlexport.ini' );
@@ -685,7 +685,7 @@ class eZXMLExportExporter
      * @param  array $readyToSendFileList The list of files to send
      * @return void
      */
-    private function sendOverFTPIfNeeded( $readyToSendFileList )
+    protected function sendOverFTPIfNeeded( $readyToSendFileList )
     {
         $ini = eZINI::instance( 'ezxmlexport.ini' );
 
@@ -810,7 +810,7 @@ class eZXMLExportExporter
      *
      * @return array The object list
      */
-    private function extractObjectList()
+    protected function extractObjectList()
     {
         $objectList = '';
 
@@ -854,7 +854,7 @@ class eZXMLExportExporter
      * @param  int   $contentObjectID   The eZContentObjectID
      * @return string the <object_metadata> tag
      */
-    private function getObjectMetaDataCustomTag( $contentObjectData, $contentObjectID )
+    protected function getObjectMetaDataCustomTag( $contentObjectData, $contentObjectID )
     {
         $XMLString = '<object_metadata>';
 
@@ -969,7 +969,7 @@ class eZXMLExportExporter
      *
      * @return array The fetch parameters
      */
-    private function generateFetchParameters()
+    protected function generateFetchParameters()
     {
         $maxDepth = $this->getMaxContentTreeDepth();
 
@@ -1029,7 +1029,7 @@ class eZXMLExportExporter
      * @param  array  $exportableNodeList the list of exportable nodes
      * @return array The reordered list
      */
-    private function groupByClassIdentifier( $exportableNodeList )
+    protected function groupByClassIdentifier( $exportableNodeList )
     {
         $resultArray = array();
 
@@ -1053,7 +1053,7 @@ class eZXMLExportExporter
      * @param  array $exportableNodeList The $exportableNodeList
      * @return array The new $exportableNodeList
      */
-    private function addRelatedObjectsIfNeeded( $exportableNodeList )
+    protected function addRelatedObjectsIfNeeded( $exportableNodeList )
     {
         $relatedObjectHandling = $this->eZXMLExport->attribute( 'related_object_handling' );
 
@@ -1119,7 +1119,7 @@ class eZXMLExportExporter
      *
      * @return bool false if the content object is not exportable, true otherwise
      */
-    private function isExportable( $contentObject )
+    protected function isExportable( $contentObject )
     {
         if( !$this->contentClassIsExportable( $contentObject->attribute( 'contentclass_id' ) ) )
         {
@@ -1136,7 +1136,7 @@ class eZXMLExportExporter
      * @param  int $contentClassID The $contentClassID
      * @return bool false if the content class is not exportable, true otherwise
      */
-    private function contentClassIsExportable( $contentClassID )
+    protected function contentClassIsExportable( $contentClassID )
     {
         foreach( $this->ExportableContentClasses as $exportableContentClass )
         {
@@ -1155,7 +1155,7 @@ class eZXMLExportExporter
      *
      * @return int|bool The max depth for the content tree, false otherwise
      */
-    private function getMaxContentTreeDepth()
+    protected function getMaxContentTreeDepth()
     {
         $db   = eZDB::instance();
         $sql  = 'SELECT MAX( depth ) as max_depth FROM ezcontentobject_tree';
@@ -1177,7 +1177,7 @@ class eZXMLExportExporter
      * @param  bool $addFileFooter  wether to add the XML footer or not
      * @return bool true if success, false otherwise
      */
-    private function writeResultFile( $appendContents, $addFileHeader, $addFileFooter )
+    protected function writeResultFile( $appendContents, $addFileHeader, $addFileFooter )
     {
         if( $appendContents != true )
         {
@@ -1208,7 +1208,7 @@ class eZXMLExportExporter
      *
      * @param string $suffix The suffix to append to the filename, default false
      */
-    private function generateFileName( $suffix = false )
+    protected function generateFileName( $suffix = false )
     {
         $resultFileName = $this->CleanExportName;
 
@@ -1228,7 +1228,7 @@ class eZXMLExportExporter
      * @param  array $fileList the file list to compress
      * @return bool true if success, false otherwise
      */
-    private function compressFilesIfNeeded( $fileList )
+    protected function compressFilesIfNeeded( $fileList )
     {
         $ini = eZINI::instance( 'ezxmlexport.ini' );
 
@@ -1284,7 +1284,7 @@ class eZXMLExportExporter
      * @param  string $filePath The source file to delete
      * @return bool true if success, false otherwise
      */
-    private function deleteSourceFile( $filePath )
+    protected function deleteSourceFile( $filePath )
     {
         $this->outputMessage( 'Deleting source file : ' . $filePath , false );
 
@@ -1308,7 +1308,7 @@ class eZXMLExportExporter
      * @param  int $contentObjectID The contentobject identified by its $contentObjectID
      * @return int the number of drafts for thi object
      */
-    private function fetchDraftCount( $contentObjectID )
+    protected function fetchDraftCount( $contentObjectID )
     {
         $db = eZDB::instance();
 
@@ -1328,7 +1328,7 @@ class eZXMLExportExporter
      * @param  int $contentObjectID The contentObjectID
      * @return int the number of translations for this object
      */
-    private function fetchTranslationCount( $contentObjectID )
+    protected function fetchTranslationCount( $contentObjectID )
     {
         $db = eZDB::instance();
 
