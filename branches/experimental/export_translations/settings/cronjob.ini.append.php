@@ -5,4 +5,7 @@ ExtensionDirectories[]=ezxmlexport
 
 [CronjobPart-ezxmlexport]
 Scripts[]=ezxmlexport.php
+
+[CronjobPart-ezxmlexporttranslations]
+Scripts[]=ezxmlexporttranslations.php
 */ ?>
