@@ -10,6 +10,14 @@
 
 class eZXMLExportTranslationsExporter extends eZXMLExportExporter
 {
+    public $TranslationsToExport;
+    
+    public function __construct( $exportID, $isVerbose = true , $writeLogFile = true, $writeProcessLog = true )
+    {
+        parent::eZXMLExportExporter( $exportID, $isVerbose, $writeLogFile, $writeProcessLog );
+        $this->TranslationsToExport = unserialize( $this->eZXMLExport->attribute( 'translations_to_export' ) );
+    }
+    
     /**
      * Instruct the export to export an content object attribute
      *
@@ -91,7 +99,15 @@ class eZXMLExportTranslationsExporter extends eZXMLExportExporter
         // I can not use the native dataMap directly
         // as attribute must be ordered the way they
         // have been in the XML Schema definition
-        $aLangs = $contentObject->availableLanguages();
+        
+        // If translations have been selected in admin, only export them
+        // If no translation has been selected, export all
+        $objectLangs = $contentObject->availableLanguages();
+        if( $eZXMLExporter->TranslationsToExport )
+            $aLangs = array_intersect( $objectLangs, $eZXMLExporter->TranslationsToExport );
+        else
+            $aLangs = $objectLangs;
+        
         $rearrangedDataMap = array();
         
         foreach( $aLangs as $lang )
