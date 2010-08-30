@@ -1,0 +1,1 @@
+ALTER TABLE `ezxport_exports` ADD `translations_to_export` text NULL DEFAULT NULL  AFTER `export_hidden_nodes`;

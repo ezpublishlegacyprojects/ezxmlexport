@@ -178,6 +178,17 @@
             <input type="checkbox" name="ExportAllObjectsFromLastExport" {$ExportAllObjectsFromLastExportValue} value="1"/>
             {'or export all content object from the last export'|i18n('design/admin/ezxmlexport')}
         </div>
+        
+        <div class="block">
+            <label for="ExportTranslations">{'Translations to export (no selection means "all")'|i18n('design/admin/ezxmlexport')}</label>
+            <select name="ExportTranslations[]" id="ExportTranslations" multiple="multiple">
+            {foreach $ExportTranslations as $lang}
+                
+                <option value="{$lang}"{if $ExportTranslationsValue|contains($lang)} selected="selected"{/if}>{$lang}</option>
+            {/foreach}
+            </select>
+            
+        </div>
 
         <input type="submit" name="PublishExportButton" value="{'OK'|i18n('design/admin/class/edit')}" class="button"/>
         <input type="reset" name="ResetExportButton" value="{'Reset'|i18n('design/admin/class/edit')}" class="button"/>

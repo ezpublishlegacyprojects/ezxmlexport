@@ -256,6 +256,8 @@ if( $Type == 'export' )
         'ExportCompressionValue'              => '',
         'ExportHiddenNodesValue'              => '',
         'ExportRelatedObjectHandlingValue'    => 1,
+        'ExportTranslations'                  => eZContentLanguage::fetchLocaleList(),
+        'ExportTranslationsValue'             => array(),
         'FTPHostValue'                        => '',
         'FTPPortValue'                        => '21',
         'FTPLoginValue'                       => '',
@@ -588,6 +590,7 @@ if( $Type == 'export' )
             $eZXMLExportExport->setAttribute( 'xslt_file'              , $xsltFile );
             $eZXMLExportExport->setAttribute( 'export_hidden_nodes'    , $exportHiddenNodes );
             $eZXMLExportExport->setAttribute( 'export_from_last'       , $exportFromLast );
+            $eZXMLExportExport->setAttribute( 'translations_to_export' , serialize( $Module->actionParameter( 'ExportTranslations' ) ) );
 
             $eZXMLExportExport->store();
 
@@ -681,6 +684,9 @@ if( $Type == 'export' )
             {
                 $tpl->setVariable( 'ExportHiddenNodesValue', 'checked="checked"' );
             }
+            
+            $tpl->setVariable( 'ExportTranslations', eZContentLanguage::fetchLocaleList() );
+            $tpl->setVariable( 'ExportTranslationsValue', $eZXMLExportExport->attribute( 'translations_to_export' ) );
         }
     }
 }

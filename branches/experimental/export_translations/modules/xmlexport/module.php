@@ -101,7 +101,8 @@ $ViewList['edit'] = array(
                                                                     'ExportRecurrenceValue'          => 'ExportRecurrenceValue',
                                                                     'ExportRecurrenceUnit'           => 'ExportRecurrenceUnit',
                                                                     'ExportObjectNumberLimit'        => 'ExportObjectNumberLimit',
-                                                                    'ExportAllObjectsFromLastExport' => 'ExportAllObjectsFromLastExport' ),
+                                                                    'ExportAllObjectsFromLastExport' => 'ExportAllObjectsFromLastExport',
+                                                                    'ExportTranslations'             => 'ExportTranslations' ),
 
                                         'BrowseForNodes'  => array() ),
 

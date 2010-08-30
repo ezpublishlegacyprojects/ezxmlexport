@@ -39,7 +39,7 @@ CREATE TABLE ezxport_exports (
   compression tinyint(4) NOT NULL,
   related_object_handling tinyint(4) NOT NULL,
   xslt_file varchar(70) NOT NULL,
-  export_hidden_nodes tinyint(4) NOT NULL DEFAULT '0',
+  translations_to_export text NULL DEFAULT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
