@@ -4,6 +4,10 @@
 eZXMLExport extension documentation
 ===================================
 
+-------------------
+Translations export
+-------------------
+
 :Date: 2010/08/31
 
 .. contents:: Table of contents
